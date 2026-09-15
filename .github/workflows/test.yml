@@ -1,0 +1,71 @@
+name: Test
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  confidentiality:
+    name: Confidentiality check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test confidentiality detection
+        run: python3 -m unittest discover -s tests -p 'test_confidentiality.py'
+      - name: Check source files and complete reachable history
+        run: python3 scripts/check_confidentiality.py --history
+
+  static:
+    needs: confidentiality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Static source and diagnostic regression checks
+        run: |
+          python3 tests/check_latex.py
+          python3 -m unittest discover -s tests -p 'test_*.py'
+
+  compile:
+    needs: confidentiality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Use the same driver locally and in CI; each root keeps separate logs.
+      - name: Build and audit both document roots
+        uses: xu-cheng/latex-action@v3
+        with:
+          texlive_version: '2024'
+          root_file: |
+            main.tex
+            main-cv.tex
+          continue_on_error: true
+          extra_system_packages: python3
+          pre_compile: RUN_LATEX_INTEGRATION=1 python3 -m unittest discover -s tests -p 'test_*.py'
+          compiler: python3
+          args: scripts/build.py
+      # Diagnostics must survive failed compilation. PDFs remain local until
+      # explicitly shared; this artifact contains build logs, not evidence PDFs.
+      - name: Retain build diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: latex-diagnostics
+          path: |
+            build/*.log
+            build/*.blg
+            build/*-diagnostics.txt
+            build/tool-versions.txt
+          if-no-files-found: warn
+          retention-days: 14

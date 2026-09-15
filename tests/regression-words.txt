@@ -1,0 +1,16 @@
+# Forbidden strings: typos and artifacts fixed during code review.
+# tests/check_latex.py fails if any of these (case-sensitive, literal)
+# reappear in *.tex sources. One per line; # starts a comment.
+Prarie
+Gentics
+Sphar
+recomendation
+Achivements
+Descripton
+initative
+addtional
+co-investgator
+atleast
+lifecyle
+texit
+2042PAG

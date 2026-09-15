@@ -1,0 +1,42 @@
+% Libraries layout, implemented with standard LaTeX packages.
+% Entries remain ordinary paragraphs so long content can span pages.
+\newcommand{\PortfolioSection}[1]{%
+  \clearpage\phantomsection\addcontentsline{toc}{section}{#1}%
+  {\raggedright\sffamily\color{RoyalPurple}\fontsize{20}{24}\selectfont #1\par}%
+  {\color{RoyalPurple}\rule{0.12\textwidth}{2pt}\hspace{0.015\textwidth}%
+   \color{RoyalPurple!20}\rule{0.865\textwidth}{0.4pt}\par}\vspace{0.4em}}
+\newcommand{\ExampleNote}{%
+  \ifExamplePortfolio
+    {\small\itshape Example adapted from David Molik's tenure document.
+    Replace this content with your own record.\par}\medskip
+  \fi}
+\newcommand{\LibraryEntry}[6]{%
+  \par\addvspace{0.6em}\Needspace{7\baselineskip}%
+  {\sffamily\bfseries\color{RoyalPurple}#2\par}%
+  \if\relax\detokenize{#1}\relax\else {\small\color{RoyalPurple}#1\par}\fi
+  \if\relax\detokenize{#3}\relax\else #3\par\fi
+  \if\relax\detokenize{#4}\relax\else #4\par\fi
+  \if\relax\detokenize{#5}\relax\else #5\par\fi
+  #6\par}
+\newcommand{\LibraryItem}[2]{%
+  \par\addvspace{0.4em}\Needspace{2\baselineskip}%
+  \textbf{#1}\par\nopagebreak #2\par}
+\newcommand{\Colorhref}[2]{\href{#1}{#2}}
+% The placeholder contains no hidden original content.
+\newcommand{\Redacted}[2]{%
+  \par\addvspace{0.8em}\Needspace{3\baselineskip}%
+  \textbf{#1 --- redacted in this example}\par
+  #2\par}
+\newcommand{\OptionalLink}[2]{%
+  \if\relax\detokenize\expandafter{#2}\relax
+    #1: [Insert current URL]\par
+  \else #1: \expandafter\url\expandafter{#2}\par\fi}
+\newcommand{\EvidenceYear}[2]{\subsection{#1 (#2)}}
+
+% A separate removable authoring item, never part of the candidate's narrative.
+\newcommand{\SectionGuidance}[1]{%
+  \ifShowGuidance
+    \begin{itemize}[leftmargin=1.2em,label={\color{RoyalPurple}\textbullet},topsep=0.5em]
+      \item {\small\color{RoyalPurple}\textbf{[remove]} #1}
+    \end{itemize}
+  \fi}

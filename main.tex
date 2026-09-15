@@ -1,0 +1,50 @@
+% LaTeX Library Tenure Template: portfolio assembly.
+\input{shared/preamble}
+\begin{document}
+\hypersetup{pdfauthor={\CandidateName},pdftitle={\ReviewYear\space\ReviewType\space Portfolio}}
+\begin{titlepage}
+\raggedright
+\vspace*{0.5in}
+{\sffamily\color{RoyalPurple}\fontsize{36}{42}\selectfont\CandidateName\par}
+{\color{RoyalPurple}\rule{0.18\textwidth}{3pt}\par}
+\bigskip
+{\fontsize{20}{25}\selectfont\CandidateRank\par
+\ReviewYear\par\ReviewType\space Portfolio\par}
+\bigskip
+\CandidateRole\par\CandidateUnit\par
+\bigskip
+\SectionGuidance{Identify the candidate, rank, unit, review year and type. Provide a document collection link when used for your submission.}
+\ExampleNote
+\OptionalLink{All linked documents}{\CollectionURL}
+\vspace{0.4in}
+{\sffamily\color{RoyalPurple}\fontsize{20}{24}\selectfont Promotion and Tenure Schedule\par}
+\SectionGuidance{Enter confirmed first-year, mid-probation, and final review dates, and link the current master calendar. Verify the schedule for your appointment.}
+\bigskip
+First-year review: \FirstReview\par
+Mid-probation review: \MidReview\par
+Final tenure review: \FinalReview\par
+\OptionalLink{Master calendar}{\CalendarURL}
+\end{titlepage}
+\PortfolioSection{Employment History}
+\SectionGuidance{List your appointment date, confirmed review dates, and the current Annual Status Worksheet. Use the dates applicable to your appointment and review stage.}
+Appointment date at K-State: \AppointmentDate\par
+Mid-probation review: \MidReview\par
+Final tenure review: \FinalReview\par
+\OptionalLink{Annual Status Worksheet}{\WorksheetURL}
+\PortfolioSection{Recommendation for Promotion and Tenure}
+\SectionGuidance{Include the applicable official recommendation form. Candidate and department portions should be completed only by the appropriate people; do not copy example signatures, recommendations, or votes.}
+\Redacted{Recommendation form}{The completed form, signatures, evaluation information,
+recommendations, and previous tenure votes are not distributed with this template.
+Supply the applicable authorized form in your private submission.}
+\input{achievements}
+\input{goals}
+\input{directed}
+\input{nondirected}
+\input{researchandcreative}
+\input{evidence/records}
+\input{cv}
+\PortfolioSection{Supporting Documentation (Optional)}
+\SectionGuidance{Include relevant supporting material that is not already presented elsewhere, when appropriate for your review. Explain its purpose and protect confidential records.}
+\Redacted{Private supporting records}{Confidential correspondence and responses to
+individual evaluations are omitted. Add appropriate supporting material to your private submission.}
+\end{document}

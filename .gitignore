@@ -1,0 +1,41 @@
+# Generated build outputs and diagnostics (including compiled PDFs).
+/build/
+/main.pdf
+/main-cv.pdf
+
+# TeX/latexmk/biber intermediates, including builds outside build/.
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.synctex(busy)
+*.toc
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+*.xdv
+
+# Python caches and local environments.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+
+# Operating-system and editor temporary files.
+.DS_Store
+._*
+Thumbs.db
+*~
+*.swp
+*.swo
+
+# Do not ignore *.pdf or *.bib globally: these include portfolio evidence
+# and source bibliographies that must remain visible to version control.
