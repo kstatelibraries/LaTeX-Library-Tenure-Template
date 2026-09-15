@@ -50,7 +50,6 @@ jobs:
           root_file: |
             main.tex
             main-cv.tex
-          continue_on_error: true
           extra_system_packages: python3
           pre_compile: RUN_LATEX_INTEGRATION=1 python3 -m unittest discover -s tests -p 'test_*.py'
           compiler: python3

@@ -1,6 +1,5 @@
 """The static checker must leave valid month expressions to Biber."""
 from pathlib import Path
-import re
 import shutil
 import subprocess
 import sys
@@ -13,11 +12,17 @@ class MonthTests(unittest.TestCase):
         root = Path(__file__).resolve().parents[1]
         with tempfile.TemporaryDirectory() as directory:
             copy = Path(directory) / 'repo'
-            shutil.copytree(root, copy, ignore=shutil.ignore_patterns('.git', 'build', '__pycache__'))
-            bib = next(p for p in copy.glob('*.bib') if re.search(r'month\s*=\s*\{[^}]*\}', p.read_text()))
-            original = bib.read_text()
-            for value in ('{5}', '{May}', 'may'):
+            (copy / 'tests').mkdir(parents=True)
+            for name in ('check_latex.py', 'regression-words.txt'):
+                shutil.copy2(root / 'tests' / name, copy / 'tests' / name)
+            bib = copy / 'months.bib'
+            # Own the fixture: real example records may eventually have no months.
+            for value in (None, '{5}', '{May}', 'may'):
                 with self.subTest(value=value):
-                    bib.write_text(re.sub(r'month\s*=\s*\{[^}]*\}', 'month = '+value, original, count=1))
+                    month = '' if value is None else f'  month = {value},\n'
+                    bib.write_text(
+                        '@misc{month_fixture,\n  year = {2026},\n' + month + '}\n',
+                        encoding='utf-8',
+                    )
                     result = subprocess.run([sys.executable, 'tests/check_latex.py'], cwd=copy, capture_output=True, text=True)
                     self.assertEqual(result.returncode, 0, result.stdout+result.stderr)
