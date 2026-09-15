@@ -98,6 +98,56 @@ register new resources in `shared/bibliography.tex`. Both roots use Biber with
 registered entries, so stale example entries can still appear in filtered lists.
 Do not invent missing bibliographic dates to silence a warning.
 
+## Gathering records from Wildcat Scholar and ORCID
+
+For user-authorized profile-based work, follow the
+[README profile workflow](README.md#bringing-in-information-from-wildcat-scholar-and-orcid).
+Example identities supplied by the owner are
+[David Molik’s Wildcat Scholar profile](https://experts.ksu.edu/david.molik) and
+[ORCID 0000-0003-3192-6538](https://orcid.org/0000-0003-3192-6538).
+These are examples, not defaults for every candidate. Remove incidental trailing
+punctuation when interpreting a supplied URL; preserve the actual identifier.
+
+- Confirm identity from the user-supplied profile/iD, name, and affiliation before
+  collecting records. Read only the public profile or material the user has
+  authorized. Do not change profiles, privacy settings, or external records as
+  part of importing information into this repository.
+- Prefer official pages, an authorized export, or the documented
+  [ORCID read API](https://info.orcid.org/documentation/api-tutorials/api-tutorial-read-data-on-a-record/)
+  when appropriate access is available. Follow the service’s access requirements;
+  never put credentials in tracked files or logs. Do not invent a Wildcat Scholar
+  API or promise an export/import capability that has not been verified.
+- If a page needs JavaScript, is inaccessible, or lacks a field, report the limit.
+  Request an authorized export when needed. Do not substitute search snippets
+  for a complete profile audit or infer missing data from absence in a public view.
+- Preserve provenance for each imported item: profile/source URL, retrieval date,
+  stable work identifier, reported date/status, and any unresolved conflict.
+  Keep notes public-safe in this repository; private exports belong outside it.
+- Deduplicate by normalized DOI or another stable identifier, then compare titles,
+  authors, and dates. ORCID and Wildcat Scholar may describe the same work. Do not
+  double-count it or silently collapse distinct versions, presentations, or roles.
+- Verify publication metadata against the underlying work. Distinguish published,
+  accepted, submitted, and in-progress items; distinguish proposed and awarded
+  funding. Neither a profile entry nor an AI-generated summary proves individual
+  contribution, impact, review-period eligibility, or directed-service classification.
+- Map verified data to the existing files: identity in `candidate.tex`, CV records
+  in `cv.tex`, publication/presentation metadata in the appropriate `.bib`, and
+  supported narrative changes in the corresponding section. Add unique citation
+  keys and deliberate `keywords`; register new bibliography files. Never replace
+  curated records wholesale with an unchecked export.
+- After imports, run the static checks, build affected outputs (both for shared
+  CV/bibliography changes), inspect citations/layout, and scan confidentiality
+  before an authorized commit/push. Summarize sources read, records added/merged,
+  unresolved differences, and validation. Do not claim an import when only
+  documentation was changed.
+
+[K-State’s user guide](https://www.k-state.edu/next-gen/plan/key-initiatives/other-initiatives/wildcat-scholar/user-guide.html)
+describes profile visibility and AI summaries. ORCID documents
+[BibTeX export](https://support.orcid.org/hc/en-us/articles/360006971453-Exporting-works-into-a-BibTeX-file)
+and its [metadata/encoding limitations](https://support.orcid.org/hc/en-us/articles/360006971433-BibTeX-issues-and-troubleshooting).
+This repository currently has no automated profile importer; do not add a new
+integration or make account changes unless that work is requested.
+
 ## Build and checks
 
 Run commands from the repository root. Python scripts use only the standard

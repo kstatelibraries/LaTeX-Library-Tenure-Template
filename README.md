@@ -22,6 +22,7 @@ being aligned with Tara’s January 15, 2026 Word template and applicable update
 proposed word limits are not enforced. See [the release plan](planning/template-release.md).
 
 [How to use](#how-to-use-the-template) · [File guide](#which-file-do-i-edit) ·
+[Wildcat Scholar and ORCID](#bringing-in-information-from-wildcat-scholar-and-orcid) ·
 [Overleaf](#using-overleaf-instead) · [Troubleshooting](#if-something-goes-wrong) ·
 [Contributing](#contributing-to-the-shared-template) · [Software agents](#software-agents)
 
@@ -211,6 +212,10 @@ keep a URL’s characters intact inside `\url{...}`.
 
 ### 6. Update references and evidence
 
+Already have records in Wildcat Scholar or ORCID? Follow the
+[profile workflow below](#bringing-in-information-from-wildcat-scholar-and-orcid)
+to gather and reconcile them before editing your references.
+
 **References:** replace the example records in the `.bib` files with your own.
 Most journal records belong in `journal.bib`, presentations in `talks.bib`, and
 service references in `service.bib`. Each record needs a unique key. Its
@@ -284,6 +289,88 @@ the appropriate documents through your institution’s review process.
 
 Start with the content files. You generally do not need to change the layout
 files or the build helper in `scripts` to write your packet.
+
+## Bringing in information from Wildcat Scholar and ORCID
+
+You can use your existing scholarly profiles to gather publications, appointments,
+teaching, and service information before writing your packet. This template does
+not automatically fetch or synchronize profiles: review the records, then copy
+verified information into the appropriate `.tex` and `.bib` files.
+
+Example profiles supplied for this template:
+
+- [David Molik on Wildcat Scholar / K-State Experts](https://experts.ksu.edu/david.molik)
+- [David Molik on ORCID](https://orcid.org/0000-0003-3192-6538)
+
+Use **your own** profile when building your packet. Confirm the person’s name,
+affiliation, and ORCID iD before using records; a matching name alone is not enough.
+
+### Gather information from Wildcat Scholar
+
+1. Open your public profile at [K-State Experts](https://experts.ksu.edu/). The
+   public directory displays information from Wildcat Scholar; K-State’s
+   [user guide](https://www.k-state.edu/next-gen/plan/key-initiatives/other-initiatives/wildcat-scholar/user-guide.html)
+   explains profiles and their privacy settings.
+2. Review the available publication, professional-activity, teaching, appointment,
+   and other relevant entries. Note titles, dates, your role, and links to the
+   underlying work. Record the profile URL and the date you checked it.
+3. Open publication links to verify bibliographic details against the publisher
+   or DOI record. Treat profile summaries as starting points, not evidence of
+   your individual contribution or a tenure classification.
+4. Copy verified items into the files listed in the table below. If you already
+   have an authorized export from your account, review it item by item in the
+   same way; do not assume the public profile offers a particular export format.
+
+K-State distinguishes public, internal, and private profile information. Keep
+internal/private exports in your private packet, and use only appropriate public
+material in contributions to this repository. Absence from a public profile does
+not mean an activity did not happen. Check missing or conflicting information
+against your own records rather than inventing details.
+
+### Bring publication records across from ORCID
+
+1. Open your ORCID record and confirm the iD. Review the listed works and their
+   persistent identifiers, such as DOIs.
+2. To export your own records, sign in and go to **Works**. Select the desired
+   works, use **Actions → Export works** (or **Export all works**), then choose
+   **Export selected works to BibTeX**. Follow the current
+   [ORCID export instructions](https://support.orcid.org/hc/en-us/articles/360006971453-Exporting-works-into-a-BibTeX-file)
+   if the interface differs.
+3. Save the downloaded `.bib` file somewhere you can review it before merging it
+   into the template. ORCID exports can preserve errors and may omit metadata;
+   check authors, title, date, publication status, venue, DOI, and character
+   encoding. See [ORCID’s BibTeX notes](https://support.orcid.org/hc/en-us/articles/360006971433-BibTeX-issues-and-troubleshooting).
+4. Compare against your existing references and Wildcat Scholar records. Merge
+   duplicates by DOI where available, then compare title, authors, and year.
+   Keep a preprint and a published article distinguishable when both are relevant.
+5. Copy the reviewed records into the appropriate existing `.bib` file, give
+   every record a unique key, and add the template’s `keywords`. For example,
+   `keywords = {journal,creative}` places a suitable article in the collaborative
+   CV publication list and RSCAD evidence list. Choose keywords for the actual
+   item; exported records do not automatically have the template’s classifications.
+6. If you keep a new bibliography filename, register it in
+   `shared/bibliography.tex`. Build again and check that each record appears in
+   the intended section without duplicates.
+
+### Put each verified item in the right place
+
+| Information you gathered | Where it can go |
+| --- | --- |
+| Confirmed identity and appointment information | `candidate.tex` and the appropriate entries in `cv.tex` |
+| Publications and presentations | Relevant `.bib` files, with the appropriate section keywords |
+| Teaching, professional roles, awards, and service | `cv.tex` and the relevant narrative section, after checking your role and review-period relevance |
+| Significance, impact, and individual contribution | Your own explanation in the narrative files, supported by evidence; do not infer these from a profile listing |
+
+Keep source URLs and access dates in your working notes, or as non-confidential
+comments alongside imported bibliography entries. If the two profiles disagree,
+record the discrepancy and verify the underlying source. Do not silently choose
+the more favorable date, claim an unconfirmed award, or convert an in-progress
+work into a publication. Apply your review’s reporting period after gathering the
+records; profiles may cover an entire career.
+
+Then run the normal build command and inspect both PDFs. For changes intended for
+this shared repository, also run the confidentiality check before committing and
+pushing, as described under [Contributing](#contributing-to-the-shared-template).
 
 ## Using Overleaf instead
 
