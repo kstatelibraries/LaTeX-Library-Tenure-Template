@@ -137,7 +137,8 @@ punctuation when interpreting a supplied URL; preserve the actual identifier.
   curated records wholesale with an unchecked export.
 - After imports, run the static checks, build affected outputs (both for shared
   CV/bibliography changes), inspect citations/layout, and scan confidentiality
-  before an authorized commit/push. Summarize sources read, records added/merged,
+  before an authorized public-template commit/push. For private packets, use the
+  private-copy workflow below. Summarize sources read, records added/merged,
   unresolved differences, and validation. Do not claim an import when only
   documentation was changed.
 
@@ -193,6 +194,39 @@ date. Investigate new warnings. Never commit generated PDFs, caches, or logs.
 
 ## Confidentiality and publication
 
+### Private candidate packets
+
+The intended workflow for confidential evidence is an independent private copy,
+with its publication confidentiality job disabled before adding records. Follow
+[the README private packet steps](README.md#private-packets-and-confidential-evidence).
+GitHub forks of this public repository remain public; do not promise to make a
+public fork private. Create an independent repository with private visibility.
+
+For a user-authorized private-packet task:
+
+1. Verify the actual destination repository is private and check the local push
+   remote before adding or pushing evidence. A folder name or branch name does
+   not establish privacy. If visibility cannot be verified, do not push evidence.
+2. In the private copy only, remove the `confidentiality` job from
+   `.github/workflows/test.yml` and remove `needs: confidentiality` from both
+   `static` and `compile`. Retain the build/static jobs and read-only permissions;
+   verify their run after pushing the workflow change.
+3. Legitimate evaluations, supervisor comments, votes, and supporting attachments
+   may then be added to the private packet as requested. Disabling this publication
+   gate is the intended configuration, not a detector exception. Do not weaken the
+   scanner or require private packet commits to pass the public publication scan.
+   Synthetic detector tests can remain; the local build does not scan the packet.
+4. Treat private CI logs and diagnostic artifacts as potentially containing packet
+   text. Follow the user's retention needs; the README explains how to remove
+   the diagnostic-upload step. Never copy private records into public issues,
+   pull requests, or other public output. Keep credentials out of tracked files.
+5. Keep evidence and its history in the private repository. Transfer reusable
+   improvements through reviewed, public-safe changes on a clean public-template
+   branch, not by merging private packet history or changing packet visibility.
+
+### Public template contributions
+
+The requirements below apply to changes intended for this public template.
 Keep evaluations, supervisor/committee feedback, tenure votes, signed forms,
 private links, and credentials out of tracked files and history. Placeholders
 must contain only explanatory text, never originals hidden by color, overlays,
@@ -223,7 +257,8 @@ synthetic examples, never real private feedback or votes.
 
 CI checks full history with `fetch-depth: 0`. Both static and compile jobs depend
 on the confidentiality job, preventing detected private records from reaching
-uploaded build logs. Preserve that gate and read-only workflow permissions.
+uploaded build logs. Preserve that gate and read-only workflow permissions in
+the public template; the private-copy exception above does not change this workflow.
 The normal local build deliberately does not run the publication scan: users can
 build confidential packets in their own private copies.
 

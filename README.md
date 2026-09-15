@@ -60,6 +60,8 @@ explains the download options.
 Use your own local or private copy for your packet. This repository is public;
 do not upload your completed evaluations, letters, or other confidential records
 to it. Downloading the ZIP does not create a connection that uploads your edits.
+For GitHub-backed confidential evidence, follow the
+[private packet workflow](#private-packets-and-confidential-evidence) before adding records.
 
 ### 2. Install the software once
 
@@ -420,6 +422,65 @@ other software agents. It covers the source map, LaTeX macro interfaces, build a
 test commands, confidentiality checks, publication workflow, and known limitations.
 Read it before making changes. The guide also links to
 [the design and migration discussion in issue #9](https://github.com/molikd/Molik-Tenure-Document/issues/9).
+
+## Private packets and confidential evidence
+
+The intended personal-packet workflow is to make your own **private repository**,
+turn off its publication confidentiality check, and then add the evidence needed
+for your review, including evaluations, supervisor comments, and tenure votes.
+The shared public template keeps its confidentiality check enabled.
+
+### Create a private copy first
+
+GitHub’s **Fork** button creates a public fork of this public repository, and you
+cannot change that fork’s visibility independently. Use an independent private
+copy for your packet. See [GitHub’s fork visibility rules](https://docs.github.com/en/pull-requests/reference/forks).
+
+1. Download and extract the clean template ZIP as described in
+   [step 1](#1-download-your-own-copy). Do this before adding personal evidence.
+2. On GitHub, create a **new repository** under your account or an approved
+   organization. Choose **Private** before creating it. Give it a name such as
+   `My-Tenure-Portfolio`.
+3. Confirm that the repository page displays **Private** and that its access
+   settings include only the intended collaborators. A private repository is
+   accessible to people granted access; use an institution-approved account and
+   sharing arrangement for your records.
+4. Add the extracted template files to this new repository using GitHub Desktop
+   or Git. Include the hidden `.github` directory and retain `LICENSE` and
+   `ATTRIBUTION.md`. Set the new private repository as the push destination;
+   verify the destination before pushing. Start from the clean template, without
+   importing a personal packet’s old branches or history.
+
+### Turn off the publication check in your private copy
+
+After confirming the destination is private, edit
+[`.github/workflows/test.yml`](.github/workflows/test.yml) **in that private copy**:
+
+1. Remove the entire `confidentiality:` job, from that line through its last
+   step, stopping before `static:`. Keep the surrounding `jobs:` line.
+2. Remove `needs: confidentiality` from **both** `static:` and `compile:`.
+   Otherwise those build checks still depend on the removed job.
+3. Keep the static tests, PDF build, and read-only workflow permissions. Commit
+   and push this workflow change to the private repository. Check its **Actions**
+   tab to confirm that the remaining jobs run successfully.
+
+The remaining detector unit tests use synthetic examples; they do not scan your
+packet. You do not need to delete the detector or weaken its matching rules.
+The normal local build (`python3 scripts/build.py`) also does not run the
+publication confidentiality scan.
+
+You can now add the confidential evidence and replace the placeholders in your
+private packet. Build logs can include document text and filenames; the workflow
+retains diagnostic artifacts for 14 days. If you do not want these retained on
+GitHub, remove the **Retain build diagnostics** step in your private copy and
+use local logs for troubleshooting.
+
+Keep the packet and its history private. Do not open a pull request containing
+personal evidence against the shared template or make the completed packet
+repository public. For reusable improvements, copy only reviewed, public-safe
+changes into a clean branch of the public template and run its confidentiality
+check there. Turning off the check allows private evidence; it does not redact
+files, history, logs, or PDFs for publication.
 
 ## Contributing to the shared template
 
