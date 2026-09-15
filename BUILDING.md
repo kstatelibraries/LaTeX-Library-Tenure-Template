@@ -119,6 +119,29 @@ only from build jobs that pass that gate. Logs can
 contain document text: keep confidential submissions in private repositories.
 Different tool/font versions may change line wrapping and pagination.
 
+### Build failure behavior (issue #2)
+
+The compile action stops at the first failed document; its nonzero exit fails the
+job and workflow. The diagnostic-upload step uses `if: always()`, so available
+logs are retained even after failure. Neither the compile job nor its build step
+uses GitHub's `continue-on-error` override.
+
+The removed `with.continue_on_error: true` setting was a different option:
+[the LaTeX action implementation](https://github.com/xu-cheng/latex-action/blob/v3/entrypoint.sh)
+tries subsequent documents but still returns a nonzero exit if compilation fails.
+Thus the earlier claim that this input made broken builds green was incorrect;
+removing it makes failure handling stop immediately rather than repairing a
+suppressed exit status. See [review issue #2](https://github.com/kstatelibraries/LaTeX-Library-Tenure-Template/issues/2).
+
+The month regression test owns a small synthetic bibliography and checks both a
+record without a month and numeric, textual, and macro month values. It remains
+active even if every month field is removed from the example bibliography.
+The opt-in compiler-failure test checks the driver's failure status and logs in
+CI's TeX environment. It does not assert the final GitHub workflow conclusion;
+a separate deliberately failing workflow run would be needed to verify that
+end to end. No intentionally failing workflow is added to routine checks.
+
+
 ## Overleaf
 
 For a private copy, upload the current source tree with `candidate.tex`, `shared`,
