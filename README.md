@@ -11,6 +11,8 @@ tenure portfolios, with a matching standalone CV. Real examples from David
 Molik’s tenure document show how the sections can be used. Confidential records,
 evaluations, and previous tenure votes are replaced with labeled placeholders.
 
+**Software agents:** read [AGENTS.md](AGENTS.md) before working in this repository.
+
 **New to LaTeX? Start with the numbered guide below.** You do not need Git or a
 GitHub account to download the template and work on your own computer.
 
@@ -21,7 +23,7 @@ proposed word limits are not enforced. See [the release plan](planning/template-
 
 [How to use](#how-to-use-the-template) · [File guide](#which-file-do-i-edit) ·
 [Overleaf](#using-overleaf-instead) · [Troubleshooting](#if-something-goes-wrong) ·
-[Contributing](#contributing-to-the-shared-template)
+[Contributing](#contributing-to-the-shared-template) · [Software agents](#software-agents)
 
 ## What you will make
 
@@ -323,6 +325,14 @@ You can [open an issue](https://github.com/kstatelibraries/LaTeX-Library-Tenure-
 with your operating system, tool versions, and a small non-confidential example
 of the problem. Review log excerpts before sharing them: logs can contain your
 source text.
+
+## Software agents
+
+[AGENTS.md](AGENTS.md) is the repository-wide guide for AI coding assistants and
+other software agents. It covers the source map, LaTeX macro interfaces, build and
+test commands, confidentiality checks, publication workflow, and known limitations.
+Read it before making changes. The guide also links to
+[the design and migration discussion in issue #9](https://github.com/molikd/Molik-Tenure-Document/issues/9).
 
 ## Contributing to the shared template
 
